@@ -1,6 +1,6 @@
 # IAMDinosaur
 
-A simple artificial inteligence to teach Google Chrome's offline dinosaur to
+A simple artificial intelligence to teach Google Chrome's offline dinosaur to
 jump cactus, using Neural Networks and a simple Genetic Algorithm.
 
 ## Instalation
