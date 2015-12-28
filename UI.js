@@ -10,9 +10,9 @@ var screen = blessed.screen()
 var UI = {};
 
 
-// 
+//
 // Initialize UI objects
-// 
+//
 UI.init = function (gameManipulator, learner) {
 	UI.gm = gameManipulator;
 	UI.learner = learner;
@@ -23,9 +23,9 @@ UI.init = function (gameManipulator, learner) {
 		screen: screen
 	});
 
-	// 
+	//
 	// Build Sensor inputs
-	// 
+	//
 	UI.uiSensors = UI.grid.set(0, 0, 3, 6, contrib.bar, {
 		label: 'Network Inputs',
 		// bg: 'white',
@@ -35,18 +35,18 @@ UI.init = function (gameManipulator, learner) {
 		maxHeight: 100,
 	});
 
-	// 
+	//
 	// Build Log box
-	// 
+	//
 	UI.logger = UI.grid.set(3, 0, 3, 6, contrib.log, {
 		fg: 'green',
 		selectedFg: 'green',
 		label: 'Logs'
 	});
 
-	// 
+	//
 	// Current score/time view
-	// 
+	//
 	UI.uiScore = UI.grid.set(6, 0, 3, 3, blessed.Text, {
 		label: 'Game Stats',
 		// bg: 'green',
@@ -55,9 +55,9 @@ UI.init = function (gameManipulator, learner) {
 		align: 'center',
 	});
 
-	// 
+	//
 	// Current Genomes stats
-	// 
+	//
 	UI.uiGenomes = UI.grid.set(6, 3, 3, 3, blessed.Text, {
 		label: 'Genome Stats',
 		// bg: 'green',
@@ -67,9 +67,9 @@ UI.init = function (gameManipulator, learner) {
 	});
 
 
-	// 
+	//
 	// Load Tree
-	// 
+	//
 	UI.savesTree = UI.grid.set(9, 0, 3, 3, contrib.tree, {
 		label: 'Saved Genomes',
 	});
@@ -93,9 +93,9 @@ UI.init = function (gameManipulator, learner) {
 
 	UI.refreshFiles();
 
-	// 
+	//
 	// Save Btn
-	// 
+	//
 	UI.btnSave = UI.grid.set(9, 3, 3, 3, blessed.box, {
 		label: 'Save to File',
 		bg: 'green',
@@ -113,7 +113,7 @@ UI.init = function (gameManipulator, learner) {
 
 		UI.logger.log('Saving '+jsonGenomes.length+' genomes...');
 
-		var fileName = './genomes.gen_'+UI.learner.generation+'_'+Date.now()+'.json';
+		var fileName = './genomes/gen_'+UI.learner.generation+'_'+Date.now()+'.json';
 		fs.writeFile(fileName, JSON.stringify(jsonGenomes), function (err){
 			if(err)
 				UI.logger.log('Failed to save! '+err);
@@ -145,12 +145,12 @@ UI.init = function (gameManipulator, learner) {
 };
 
 
-// 
+//
 // Read entire folder and select files that match a .json file
-// 
+//
 UI.refreshFiles = function (){
 	var files = [];
-	var fileData = 
+	var fileData =
 	{
 		name: 'Saved Files',
 		extended: true,
@@ -174,14 +174,14 @@ UI.refreshFiles = function (){
 	UI.savesTree.setData(fileData);
 }
 
-// 
+//
 // Updates data on the screen and render it
-// 
+//
 UI.render = function () {
 
-	// 
+	//
 	// Update data
-	// 
+	//
 	UI.uiSensors.setData({
 		titles: ['Distance', 'Size', 'Speed', 'Activation'],
 		data: [
@@ -192,9 +192,9 @@ UI.render = function () {
 		]
 	})
 
-	// 
+	//
 	// Set Genome stats and score
-	// 
+	//
 	var learn = UI.learner;
 	var uiStats = 'Status: '+learn.state+'\n';
 	uiStats += 'Fitness: '+UI.gm.points+'\nGameStatus: '+UI.gm.gamestate + '\n';
@@ -208,9 +208,9 @@ UI.render = function () {
 		UI.uiGenomes.setText('Loading...');
 	}
 
-	// 
+	//
 	// Render screen
-	// 
+	//
 	screen.render();
 }
 
