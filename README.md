@@ -1,7 +1,11 @@
 # IAMDinosaur
 
+![IAMDinosaur](https://raw.githubusercontent.com/ivanseidel/IAMDinosaur/master/assets/top_score.png)
+
 A simple artificial intelligence to teach Google Chrome's offline dinosaur to
 jump cactus, using Neural Networks and a simple Genetic Algorithm.
+
+**Watch** this video to see it in action, and learn how it works: [Artificial Inteligence with Google's Dinosaur](https://youtu.be/P7XHzqZjXQs)
 
 ## Instalation
 
@@ -75,8 +79,33 @@ There are a few files in the project:
 - `Learner.js`: It is the core implementation of the Genetic Algorithm. This is where
   "magic" happens, by running generations, doing "natural" selection, cross-over, mutation...
 
+
+### How to: Load a genome
+
+1. Make sure Genome is inside `genomes` folder with a `.json` extension
+2. Run the program
+3. Click the list in the terminal
+4. Navigate up/down to the wanted file
+5. Press `enter` (then, to start, press `s`)
+
+
+### Be aware of a game bug
+
+The dino game has a anoying bug: It starts to "drift" to the right with time
+making the dino to be wrong offseted from the origin of the game. That, makes
+the program to read the dino as a cactus, since it is the same color.
+
+You can fix that by continuously refreshing the page, or, by pasting this code inside the 
+console in the element inspector:
+
+```
+// Make sure the dino does not drift to the right
+setInterval(function (){Runner.instance_.tRex.xPos = 21}, 2000)
+```
+
 ## Credits
 
 - [Ivan Seidel](https://github.com/ivanseidel)
 - [João Pedro](https://github.com/joaopedrovbs)
 - [Tony Ngan](https://github.com/tngan) **The idea came from him**
+
