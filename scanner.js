@@ -3,7 +3,7 @@
 */
 
 // External Modules
-var robot = require('./robotjs');
+var robot = require('robotjs');
 var screenSize = robot.getScreenSize();
 
 // Indexes
@@ -13,29 +13,29 @@ var Y = 1;
 // Create the "class" wrapper
 var scanner = {};
 
-// 
+//
 // Check if the given position is outside the Screen
-// 
+//
 scanner.isOutOfBound = function (pos) {
 	if( pos[X] < 0 || pos[Y] < 0 ||
 		pos[X] >= screenSize.width ||
 		pos[Y] >= screenSize.height)
 		return true;
 
-	return false;		
+	return false;
 }
 
-// 
+//
 // Limits the x/y values of position to fit the screen
-// 
+//
 scanner.makeInBounds = function (pos) {
-	
+
 	if(pos[X] < 0)
 		pos[X] = 0;
 
 	if(pos[X] >= screenSize.width)
 		pos[X] = screenSize.width - 1;
-	
+
 	if(pos[Y] < 0)
 		pos[Y] = 0;
 
@@ -49,11 +49,11 @@ scanner.makeInBounds = function (pos) {
 	Given start [X, Y], and a DELTA [dX, dY],
 	maps from "start", adding "delta" to position,
 	until "matchinColor" is found OR isOutOfBounds.
-	
+
 	If iterations reach > iterLimit:
 		returns null;
 
-	if isOutOfBounds: 
+	if isOutOfBounds:
 		returns null
 
 	otherwise:
@@ -78,7 +78,7 @@ scanner.scanUntil = function (start, delta, matchingColor, invertMatch, iterLimi
 
 		if(!invertMatch && color.toString() == matchingColor)
 			return current;
-		
+
 		if(invertMatch && color.toString() != matchingColor)
 			return current;
 

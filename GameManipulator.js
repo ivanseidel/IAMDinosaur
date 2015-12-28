@@ -2,14 +2,14 @@
 	Developed by Ivan Seidel [https://github.com/ivanseidel]
 */
 
-var robot = require('./robotjs');
+var robot = require('robotjs');
 
 var scanner = require ('./scanner');
 var screenSize = robot.getScreenSize();
 
-// 
+//
 // Color definitions
-// 
+//
 
 // This is the Dino's colour, also used by Obstacles.
 var COLOR_DINOSAUR = "535353";
@@ -28,20 +28,20 @@ var GameManipulator = {
 	onGameStart: null,
 	onSensorData: null,
 
-	// Game State	
+	// Game State
 	gamestate: 'OVER',
 
 	// GameOver Position
 	gameOverOffset: [190, -82],
 
-	// 
+	//
 	// Stores an array of "sensors" (Ray tracings)
 	// Positions are always relative to global "offset"
-	// 
+	//
 	sensors: [
 		{
 			lastValue: 1,
-			
+
 			value: null,
 			offset: [84, -15], // 64,-15
 			step: [4, 0],
@@ -68,9 +68,9 @@ var GameManipulator = {
 };
 
 
-// 
+//
 // Find out dinosaur (fast)
-// 
+//
 GameManipulator.findGamePosition = function () {
 	var pos, dinoPos, skipXFast = 15;
 
@@ -147,10 +147,10 @@ GameManipulator.findGamePosition = function () {
 };
 
 
-// 
+//
 // Read Game state
 // (If game is ended or is playing)
-// 
+//
 GameManipulator.readGameState = function () {
 	// Read GameOver
 	var found = scanner.scanUntil(
@@ -170,7 +170,7 @@ GameManipulator.readGameState = function () {
 		// Trigger callback and clear
 		GameManipulator.onGameEnd && GameManipulator.onGameEnd(GameManipulator.points);
 		GameManipulator.onGameEnd = null;
-		
+
 		// console.log('GAME OVER: '+GameManipulator.points);
 
 	}else if(!found && GameManipulator.gamestate != 'PLAYING'){
@@ -203,14 +203,14 @@ GameManipulator.readGameState = function () {
 }
 
 
-// 
+//
 // Call this to start a fresh new game
-// Will wait untill game has ended, 
+// Will wait untill game has ended,
 // and call the `next` callback
-// 
+//
 var _startKeyInterval;
 GameManipulator.startNewGame = function (next) {
-	
+
 	// Refresh state
 	GameManipulator.readGameState();
 
@@ -243,13 +243,13 @@ GameManipulator.startNewGame = function (next) {
 }
 
 
-// 
+//
 // Compute points based on sensors
-// 
+//
 // Basicaly, checks if an object has
 // passed trough the sensor and the
 // value is now higher than before
-// 
+//
 GameManipulator.computePoints = function () {
 	for(var k in GameManipulator.sensors){
 		var sensor = GameManipulator.sensors[k];
@@ -262,19 +262,19 @@ GameManipulator.computePoints = function () {
 }
 
 
-// 
+//
 // Read sensors
-// 
-// Sensors are like ray-traces: 
+//
+// Sensors are like ray-traces:
 //   They have a starting point,
 //   and a limit to search for.
-// 
+//
 // Each sensor can gatter data about
 // the DISTANCE of the object, it's
 // SIZE and it's speed
-// 
+//
 // Note: We currently only have a sensor.
-// 
+//
 GameManipulator.readSensors = function () {
 	var offset = GameManipulator.offset;
 
@@ -313,9 +313,9 @@ GameManipulator.readSensors = function () {
 		if(end){
 			sensor.value = (end[0] - start[0]) / (GameManipulator.width * sensor.length);
 
-			// 
+			//
 			// Calculate size of obstacle
-			// 
+			//
 			var endPoint = scanner.scanUntil(
 				[end[0] + 75, end[1]],
 				[-2, 0],
@@ -354,7 +354,7 @@ GameManipulator.readSensors = function () {
 		if(sensor.value < sensor.lastValue){
 			// Compute speed
 			var newSpeed = (sensor.lastValue - sensor.value) / dt;
-			
+
 			sensor.lastSpeeds.unshift(newSpeed);
 
 			while(sensor.lastSpeeds.length > 10)
@@ -366,7 +366,7 @@ GameManipulator.readSensors = function () {
 				avgSpeed += sensor.lastSpeeds[k] / sensor.lastSpeeds.length;
 
 			sensor.speed = Math.max(avgSpeed - 1.5, sensor.speed);
-			
+
 		}
 
 		sensor.size = Math.min(sensor.size, 1.0);
@@ -385,13 +385,13 @@ GameManipulator.readSensors = function () {
 }
 
 
-// 
+//
 // Set action to game
-// Values: 
+// Values:
 //  0.0 to  0.4: DOWN
 //  0.4 to  0.6: NOTHING
 //  0.6 to  1.0: UP (JUMP)
-// 
+//
 var PRESS = 'down';
 var RELEASE = 'up';
 GameManipulator.lastOutputSet = 'NONE';
@@ -430,24 +430,24 @@ GameManipulator.setGameOutput = function (output){
 	GameManipulator.lastOutputSet = GameManipulator.gameOutputString;
 }
 
-// 
+//
 // Simply maps an real number to string actions
-// 
+//
 GameManipulator.getDiscreteState = function (value){
 	if(value < 0.45){
 		return 'DOWN'
 	}else if(value > 0.55){
 		return 'JUMP';
 	}
-	
+
 	return 'NORM';
 }
 
 
-// 
+//
 // Click on the Starting point
 // to make sure game is focused
-// 
+//
 GameManipulator.focusGame = function (){
 	robot.moveMouse(GameManipulator.offset[0], GameManipulator.offset[1]);
 	robot.mouseClick("left");
