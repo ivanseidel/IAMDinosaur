@@ -1,3 +1,7 @@
+/*
+	Developed by Ivan Seidel [https://github.com/ivanseidel]
+*/
+
 var _ = require('lodash');
 var async = require('async');
 var synaptic = require('synaptic');

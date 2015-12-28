@@ -1,3 +1,7 @@
+/*
+	Developed by Ivan Seidel [https://github.com/ivanseidel]
+*/
+
 // External Modules
 var robot = require('./robotjs');
 var screenSize = robot.getScreenSize();

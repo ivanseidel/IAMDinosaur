@@ -1,3 +1,7 @@
+/*
+	Developed by Ivan Seidel [https://github.com/ivanseidel]
+*/
+
 var UI = require('./UI');
 var robot = require('./robotjs');
 var Learner = require('./Learner');

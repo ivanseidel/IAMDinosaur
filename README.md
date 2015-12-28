@@ -77,5 +77,6 @@ There are a few files in the project:
 
 ## Credits
 
-- [Tony Ngan](https://github.com/tngan) **The idea came from him**
+- [Ivan Seidel](https://github.com/ivanseidel)
 - [João Pedro](https://github.com/joaopedrovbs)
+- [Tony Ngan](https://github.com/tngan) **The idea came from him**

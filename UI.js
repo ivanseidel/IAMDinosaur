@@ -1,3 +1,7 @@
+/*
+	Developed by Ivan Seidel [https://github.com/ivanseidel]
+*/
+
 var fs = require('fs');
 var blessed = require('blessed')
 var contrib = require('blessed-contrib')

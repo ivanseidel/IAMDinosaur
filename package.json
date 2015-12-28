@@ -1,13 +1,13 @@
 {
   "name": "iamdinosaur",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple artificial inteligence to teach Google's Dinosaur to jump cactus",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Ivan Seidel",
+  "license": "MIT",
   "dependencies": {
     "async": "^1.5.0",
     "blessed": "^0.1.81",

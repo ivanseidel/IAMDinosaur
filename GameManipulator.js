@@ -1,3 +1,7 @@
+/*
+	Developed by Ivan Seidel [https://github.com/ivanseidel]
+*/
+
 var robot = require('./robotjs');
 
 var scanner = require ('./scanner');
