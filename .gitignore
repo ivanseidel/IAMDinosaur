@@ -9,3 +9,4 @@ robotjs
 # Saved files
 genomes/*
 !genomes/.gitkeep
+!genomes/ninja.json
