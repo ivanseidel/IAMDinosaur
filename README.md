@@ -66,7 +66,7 @@ There are a few files in the project:
 
 - `index.js`: It tight all things together.
 
-- `scanner.js`: Basic abstraction layer above RobotJs library that reads the screen like
+- `Scanner.js`: Basic abstraction layer above RobotJs library that reads the screen like
   ray tracing. Also have some utilities functions.
 
 - `UI.js`: Global scope for the UI management. It initializes and also updates the screen
@@ -102,6 +102,11 @@ console in the element inspector:
 // Make sure the dino does not drift to the right
 setInterval(function (){Runner.instance_.tRex.xPos = 21}, 2000)
 ```
+
+## Development guidelines
+
+Please, follow the Node.js style guide from [Felix](https://github.com/felixge/node-style-guide).
+It is not complex, and has a great simple pattern for things.
 
 ## Credits
 
