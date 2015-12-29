@@ -7,7 +7,7 @@ jump cactus, using Neural Networks and a simple Genetic Algorithm.
 
 **Watch** this video to see it in action, and learn how it works: [Artificial Inteligence with Google's Dinosaur](https://youtu.be/P7XHzqZjXQs)
 
-## Instalation
+## Installation
 
 1. Install `Node.js` on your computer.
 
@@ -57,7 +57,7 @@ in the values/configurations of the Neural Network, creating a new genome.
 We do the cross-over/mutation until we get 12 genomes again, and repeat it constantly.
 
 
-## Inplementation
+## Implementation
 
 All the implementation was done using Node.js, with Synaptic (Neural Network library),
 and RobotJs (a library to read pixels and simulate key presses).
