@@ -14,6 +14,10 @@
     "blessed-contrib": "^2.5.2",
     "lodash": "^3.10.1",
     "robotjs": "^0.3.6",
-    "synaptic": "^1.0.2"
+    "synaptic": "^1.0.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ivanseidel/IAMDinosaur.git"
   }
 }
