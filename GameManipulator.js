@@ -8,7 +8,7 @@ var Scanner = require ('./Scanner');
 // COLOR DEFINITIONS
 // This is the Dino's colour, also used by Obstacles.
 var COLOR_DINOSAUR = '535353';
-
+var DARK_COLOR_DINO = 'ACACAC';
 
 var GameManipulator = {
 
@@ -207,7 +207,12 @@ GameManipulator.startNewGame = function (next) {
 
     // Press space to begin game (repetidelly)
     _startKeyInterval = setInterval(function (){
-      robot.keyTap(' ');
+      // Due to dino slowly gliding over the screen after multiple restarts, its better to just reload the page
+      robot.keyTap('r','command');
+      setTimeout(function() {
+        // Once reloaded we wait 0.5sec for it to let us start the game with a space.
+          robot.keyTap(' ');
+      }, 500);
     }, 300);
 
     // Refresh state

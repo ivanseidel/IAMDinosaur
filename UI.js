@@ -65,6 +65,7 @@ UI.init = function (gameManipulator, learner) {
 
 
   // Callback for Loading genomes and focusing tree
+  screen.key(['l','L'], UI.savesTree.focus.bind(UI.savesTree));
   UI.savesTree.on('click', UI.savesTree.focus.bind(UI.savesTree));
   UI.savesTree.on('select', function (item){
 
@@ -94,8 +95,8 @@ UI.init = function (gameManipulator, learner) {
     align: 'center',
   });
 
-  UI.btnSave.on('click', function (){
-
+  //UI.btnSave.on('click', function (){
+  screen.key(['o','O'], function(){
     var jsonGenomes = [];
     for (var k in UI.learner.genomes) {
       jsonGenomes.push(UI.learner.genomes[k].toJSON());
@@ -151,7 +152,7 @@ UI.refreshFiles = function (){
   var files = fs.readdirSync('./genomes');
   for (var k in files) {
     if (files[k].indexOf('.json') >= 0) {
-      
+
       fileData.children.push({
         name: files[k],
         isFile: true,
