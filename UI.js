@@ -5,6 +5,27 @@ var fs = require('fs');
 var screen = blessed.screen()
 
 var UI = {};
+var savegame = function(){
+  var jsonGenomes = [];
+  for (var k in UI.learner.genomes) {
+    jsonGenomes.push(UI.learner.genomes[k].toJSON());
+  }
+
+  UI.logger.log('Saving '+jsonGenomes.length+' genomes...');
+
+  var dir = './genomes';
+  var fileName = dir + '/gen_'+UI.learner.generation+'_'+Date.now()+'.json';
+  fs.writeFile(fileName, JSON.stringify(jsonGenomes), function (err){
+    if (err) {
+      UI.logger.log('Failed to save! '+err);
+    } else {
+      UI.logger.log('Saved to '+fileName);
+    }
+
+    UI.refreshFiles();
+  });
+
+};
 
 
 // Initialize UI objects
@@ -95,28 +116,8 @@ UI.init = function (gameManipulator, learner) {
     align: 'center',
   });
 
-  //UI.btnSave.on('click', function (){
-  screen.key(['o','O'], function(){
-    var jsonGenomes = [];
-    for (var k in UI.learner.genomes) {
-      jsonGenomes.push(UI.learner.genomes[k].toJSON());
-    }
-
-    UI.logger.log('Saving '+jsonGenomes.length+' genomes...');
-
-    var dir = './genomes';
-    var fileName = dir + '/gen_'+UI.learner.generation+'_'+Date.now()+'.json';
-    fs.writeFile(fileName, JSON.stringify(jsonGenomes), function (err){
-      if (err) {
-        UI.logger.log('Failed to save! '+err);
-      } else {
-        UI.logger.log('Saved to '+fileName);
-      }
-
-      UI.refreshFiles();
-    });
-
-  });
+  UI.btnSave.on('click', savegame())
+  screen.key(['o','O'], savegame());
 
   screen.key(['escape', 'q', 'C-c'], function(ch, key) {
     return process.exit(0);
