@@ -1,8 +1,8 @@
-var contrib = require('blessed-contrib')
-var blessed = require('blessed')
+var contrib = require('blessed-contrib');
+var blessed = require('blessed');
 var fs = require('fs');
 
-var screen = blessed.screen()
+var screen = blessed.screen();
 
 var UI = {};
 var savegame = function(){
@@ -116,15 +116,20 @@ UI.init = function (gameManipulator, learner) {
     align: 'center',
   });
 
-  UI.btnSave.on('click', savegame())
-  screen.key(['o','O'], savegame());
+  UI.btnSave.on('click', function(){
+      savegame();
+  });
+
+ screen.key(['o','O'], function(){
+   savegame();
+ });
 
   screen.key(['escape', 'q', 'C-c'], function(ch, key) {
     return process.exit(0);
   });
 
   screen.key(['s'], function (ch, key){
-    if (learner.state == 'STOP') {
+    if (learner.state === 'STOP') {
       learner.state = 'LEARNING';
       gameManipulator.focusGame();
       learner.startLearning();
@@ -133,7 +138,7 @@ UI.init = function (gameManipulator, learner) {
     }
   });
 
-  screen.render()
+  screen.render();
 };
 
 
@@ -149,7 +154,7 @@ UI.refreshFiles = function (){
   };
 
   // Populate tree
-  UI.logger.log('Reading genomes dir...')
+  UI.logger.log('Reading genomes dir...');
   var files = fs.readdirSync('./genomes');
   for (var k in files) {
     if (files[k].indexOf('.json') >= 0) {
@@ -192,7 +197,7 @@ UI.render = function () {
 
   if (UI.gm.gameOutput) {
     var str = '';
-    str += 'Action: ' + UI.gm.gameOutputString + '\n'
+    str += 'Action: ' + UI.gm.gameOutputString + '\n';
     str += 'Activation: ' + UI.gm.gameOutput;
     UI.uiGenomes.setText(str);
   } else {
