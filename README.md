@@ -88,6 +88,12 @@ There are a few files in the project:
 4. Navigate up/down to the wanted file
 5. Press `enter` (then, to start, press `s`)
 
+### Some shortcuts
+
+1. Run the program
+2. Press `o` to save the generation
+3. Press ´escape´, ´q´ or `C-c` to finish the process
+
 
 ### Be aware of a game bug
 
